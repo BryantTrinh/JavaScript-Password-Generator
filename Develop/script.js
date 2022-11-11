@@ -142,39 +142,60 @@ function generatePassword() {
 
   if (!options) return null;
 
-  // Conditional statement to add lowerCasedCharacters into array of characters based on input. Use concat
+  // Conditional statement to add lowerCasedCharacters into array of characters based on input. Use concat. Push characters guaranteedCharacters.
 
   if (options.hasLowerCasedCharacters) {
-    possibleCharacters = possibleCharacters.concat (specialCharacters);
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
     guaranteedCharacters.push(getRandomElement(lowerCasedCharacters));
   }
 
+// Conditional statement that is an array of possible upper cased characters based on user input, push to guaranteedCharacters as well.
+
+if (options.hasUpperCasedCharacters) {
+  possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+  guaranteedCharacters.push(getRandomElement(upperCasedCharacters));
+}
+
+// Conditional statement that is an array of numeric characters based on user input, push to guaranteedCharacters as well.box
+
+if (options.hasNumericCharacters) {
+  possibleCharacters = possibleCharacters.concat(guaranteedCharacters);
+  guaranteedCharacters.push(getRandomElement(numericCharacters));
+}
+
+// Conditional statement that is an array of special characters based on user input, push to guaranteedCharacters as well.
+
+if (options.hasSpecialCharacters) {
+  possibleCharacters = possibleCharacters.concat(guaranteedCharacters);
+  guaranteedCharacters.push(getRandomElement(specialCharacters));
+}
+
+// Add a for loop to go over password length from the options object and itselects random indexes from each of those arrays of possible Characters and combining into one result.box
+
+for (var i = 0; i < options.length; i++) {
+  var possibleCharacter = getRandomElement(possibleCharacters);
+
+  result.push(possibleCharacter);
+}
 
 
+// Adding in at least one of each guaranteed character in the results array
 
+for (var i = 0; i< guaranteedCharacters.length; i++) {
+  result[i] = guaranteedCharacters[i];
+}
 
+// #generate element reference
 
+var generateBtn = document.querySelector('#generate');
 
+// function to write the password to #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordTest = document.querySelector('#password');
+  passwordText.value = password;
+}
 
+// Click button even listener
 
-
-
-
-
-
-
-
-
-
-
-  // Write password to the #password input
-  function writePassword() {
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
-
-    passwordText.value = password;
-
-  }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener('click', writePassword);
