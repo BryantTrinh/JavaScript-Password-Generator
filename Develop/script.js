@@ -103,7 +103,51 @@ if (
   return null;
 }
 
+// store inputs in Object
 
+var passwordOptions = {
+  length: length,
+  hasLowerCasedCharacters: hasLowerCasedCharacters,
+  hasUpperCasedCharacters: hasUpperCasedCharacters,
+  hasNumericCharacters: hasNumericCharacters,
+  hasSpecialCharacters: hasSpecialCharacters,
+};
+return passwordOptions;
+}
+
+// Function for pulling random element from an array
+
+function getRandomElement(array) {
+  var randIndex = Math.floor() * array.length);
+  var randElement = array[randIndex];
+  return randElement;
+}
+
+// Function where we can generate password
+
+function generatePassword() {
+  var options = getPasswordOptions();
+  // variable to store password
+  var result = [];
+
+  // array to store types of characters to include in password
+
+  var possibleCharacters = [];
+
+  // array to contain one of each type of chosen character so they will all be used
+
+  var guaranteedCharacters = [];
+
+  // create if statement to see if options exist
+
+  if (!options) return null;
+
+  // Conditional statement to add lowerCasedCharacters into array of characters based on input. Use concat
+
+  if (options.hasLowerCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat (specialCharacters);
+    guaranteedCharacters.push(getRandomElement(lowerCasedCharacters));
+  }
 
 
 
